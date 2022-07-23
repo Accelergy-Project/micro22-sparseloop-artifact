@@ -1,0 +1,13 @@
+ART:
+  version: 0.3
+  tables:
+  - name: system.DRAM
+    area: 0
+  - name: system.SM.Subpartition[0..3].PE[0..255].LRF
+    area: 20.0
+  - name: system.SM.Subpartition[0..3].PE[0..255].MAC
+    area: 687.74999
+  - name: system.SM.Subpartition[0..3].RF
+    area: 48735.6
+  - name: system.SM.SMEM
+    area: 3617260.0

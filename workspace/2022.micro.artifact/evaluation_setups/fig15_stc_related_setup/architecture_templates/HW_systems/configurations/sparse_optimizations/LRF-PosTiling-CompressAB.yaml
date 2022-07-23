@@ -1,0 +1,136 @@
+sparse_optimizations:
+  targets:
+    - name: DRAM
+      representation-format:
+        data-spaces:
+          - name: A          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: B
+                metadata-word-bits: 1
+                payload-word-bits: 0
+                flattened_rankIDs: [ [ K ] ]
+              - format: B
+                metadata-word-bits: 0
+                payload-word-bits: 0
+                flattened_rankIDs: [ [ M ] ]
+              - format: B
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [ M ] ]              
+          - name: B          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: B
+                metadata-word-bits: 1
+                payload-word-bits: 0
+                flattened_rankIDs: [ [ K ] ]
+              - format: B
+                metadata-word-bits: 0
+                payload-word-bits: 0
+                flattened_rankIDs: [ [ N ] ]
+              - format: B
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [ N ] ]               
+   
+    - name: SMEM
+      representation-format:
+        data-spaces:
+          - name: A          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: B
+                metadata-word-bits: 1
+                payload-word-bits: 0
+                flattened_rankIDs: [ [ K ] ]
+              - format: B
+                metadata-word-bits: 0
+                payload-word-bits: 0
+                flattened_rankIDs: [ [ M ] ]
+              - format: B
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [ M ] ]          
+          - name: B          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: B
+                metadata-word-bits: 1
+                payload-word-bits: 0
+                flattened_rankIDs: [ [ K ] ]
+              - format: B
+                metadata-word-bits: 0
+                payload-word-bits: 0
+                flattened_rankIDs: [ [ N ] ]
+              - format: B
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [ N ] ]
+      
+    
+    - name: RF
+      action-optimization:
+        - type: skipping
+          target: Z
+          condition-on: [ A, B ]
+
+    - name: LRF
+      representation-format:
+        data-spaces:
+          - name: B          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: B
+                metadata-word-bits: 0
+                payload-word-bits: 0
+                flattened_rankIDs: [ [ N ] ]
+              - format: B
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [ N ] ]   
+          - name: A          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: B
+                metadata-word-bits: 0
+                payload-word-bits: 0
+                flattened_rankIDs: [ [ M ] ]
+              - format: B
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [ M ] ]   
+ 
+      action-optimization:
+        - type: position-skipping
+          target: A
+          condition-on: []
+        - type: position-skipping
+          target: B
+          condition-on: []

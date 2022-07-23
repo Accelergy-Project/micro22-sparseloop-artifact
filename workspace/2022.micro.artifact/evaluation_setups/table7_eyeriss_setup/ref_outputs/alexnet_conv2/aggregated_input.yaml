@@ -1,0 +1,548 @@
+architecture:
+  subtree:
+  - attributes:
+      technology: 45nm
+    local:
+    - attributes:
+        block_size: 4
+        datawidth: 16
+        metadata_datawidth: 5
+        metadata_storage_width: 5
+        width: 64
+      class: DRAM
+      name: DRAM
+      subclass: DRAM_metadata
+    - attributes:
+        block_size: 4
+        compression_supported: true
+        data_storage_depth: 12800
+        data_storage_width: 64
+        decompression_supported: true
+        metadata_block_size: 1
+        metadata_counter_width: 9
+        metadata_datawidth: 0
+        metadata_storage_depth: 0
+        metadata_storage_width: 0
+        n_banks: 1
+        read_bandwidth: 16
+        write_bandwidth: 16
+      class: smartbuffer_metadata
+      name: shared_glb
+    - attributes:
+        datawidth: 16
+        depth: 0
+        entries: 0
+        meshX: 14
+        num_banks: 1
+        width: 16
+      class: storage
+      name: DummyBuffer[0..13]
+      subclass: SRAM
+    name: eyeriss_168
+    subtree:
+    - local:
+      - attributes:
+          data_storage_depth: 12
+          data_storage_width: 17
+          datawidth: 17
+          meshX: 14
+          n_banks: 1
+          read_bandwidth: 2
+          write_bandwidth: 2
+        class: smartbuffer
+        name: ifmap_spad
+      - attributes:
+          data_storage_depth: 224
+          data_storage_width: 16
+          datawidth: 16
+          meshX: 14
+          n_banks: 1
+          read_bandwidth: 2
+          write_bandwidth: 2
+        class: smartbuffer
+        name: weights_spad
+      - attributes:
+          data_storage_depth: 24
+          data_storage_width: 16
+          datawidth: 16
+          meshX: 14
+          n_banks: 1
+        class: smartbuffer
+        name: psum_spad
+      - attributes:
+          datawidth: 16
+          meshX: 14
+        class: mac
+        name: MACs
+      name: PE[0..167]
+  version: 0.3
+compound_components:
+  classes:
+  - actions:
+    - name: write
+      subcomponents:
+      - actions:
+        - name: write
+        name: storage
+    - name: read
+      subcomponents:
+      - actions:
+        - name: read
+        name: storage
+    - name: gated_write
+      subcomponents:
+      - actions:
+        - name: idle
+        name: storage
+    - name: gated_read
+      subcomponents:
+      - actions:
+        - name: idle
+        name: storage
+    - name: idle
+      subcomponents:
+      - actions:
+        - name: idle
+        name: storage
+      - actions:
+        - name: idle
+        name: metadata_storage
+    - name: metadata_write
+      subcomponents:
+      - actions:
+        - name: write
+        name: metadata_storage
+    - name: metadata_read
+      subcomponents:
+      - actions:
+        - name: read
+        name: metadata_storage
+    - name: metadata_gated_read
+      subcomponents:
+      - actions:
+        - name: idle
+        name: metadata_storage
+    - name: metadata_gated_write
+      subcomponents:
+      - actions:
+        - name: idle
+        name: metadata_storage
+    attributes:
+      metadata_datawidth: must_specify
+      technology: must_specify
+      width: must_specify
+    name: DRAM_metadata
+    subcomponents:
+    - attributes:
+        technology: technology
+        width: width
+      class: DRAM
+      name: storage
+    - attributes:
+        technology: technology
+        width: metadata_datawidth
+      class: DRAM
+      name: metadata_storage
+  - actions:
+    - name: write
+      subcomponents:
+      - actions:
+        - name: write
+        name: storage
+    - name: read
+      subcomponents:
+      - actions:
+        - name: read
+        name: storage
+    - name: gated_write
+      subcomponents:
+      - actions:
+        - name: idle
+        name: storage
+    - name: gated_read
+      subcomponents:
+      - actions:
+        - name: idle
+        name: storage
+    - name: address_generation
+      subcomponents:
+      - actions:
+        - name: add
+        name: address_generators[0]
+    - name: metadata_read
+      subcomponents:
+      - actions:
+        - name: read
+        name: metadata_storage
+    - name: metadata_write
+      subcomponents:
+      - actions:
+        - name: write
+        name: metadata_storage
+    - name: gated_metadata_read
+      subcomponents:
+      - actions:
+        - name: idle
+        name: metadata_storage
+    - name: gated_metadata_write
+      subcomponents:
+      - actions:
+        - name: idle
+        name: metadata_storage
+    - name: decompression_count
+      subcomponents:
+      - actions:
+        - name: add
+        name: metadata_counters[1]
+    - name: compression_count
+      subcomponents:
+      - actions:
+        - name: add
+        name: metadata_counters[0]
+    - name: idle
+      subcomponents:
+      - actions:
+        - name: idle
+        name: storage
+      - actions:
+        - name: idle
+        name: storage
+    attributes:
+      ag_datawidth: log(data_storage_depth)
+      data_storage_depth: must_specify
+      data_storage_width: must_specify
+      datawidth: data_storage_width
+      metadata_block_size: 1
+      metadata_counter_width: must_specify
+      metadata_datawidth: must_specify
+      metadata_storage_depth: must_specify
+      metadata_storage_width: must_specify
+      n_banks: must_specify
+      n_rdwr_ports: 2
+      technology: must_specify
+    name: smartbuffer_metadata
+    subcomponents:
+    - attributes:
+        avg_sparsity: avg_sparsity
+        datawidth: datawidth
+        depth: data_storage_depth
+        n_banks: n_banks
+        n_rdwr_ports: n_rdwr_ports
+        technology: technology
+        width: data_storage_width
+      class: SRAM
+      name: storage
+    - attributes:
+        datawidth: ag_datawidth
+        technology: technology
+      class: intadder
+      name: address_generators[0..1]
+    - attributes:
+        datawidth: metadata_counter_width
+        technology: technology
+      class: intadder
+      name: metadata_counters[0..1]
+    - attributes:
+        datawidth: metadata_datawidth * metadata_block_size
+        depth: metadata_storage_depth
+        technology: technology
+        width: metadata_storage_width
+      class: SRAM
+      name: metadata_storage
+    - attributes:
+        technology: technology
+        width: 0
+      class: intadder
+      name: intersection_unit
+  - actions:
+    - name: write
+      subcomponents:
+      - actions:
+        - name: write
+        name: storage
+    - name: read
+      subcomponents:
+      - actions:
+        - name: read
+        name: storage
+    - name: gated_write
+      subcomponents:
+      - actions:
+        - name: idle
+        name: address_generators[0]
+    - name: gated_read
+      subcomponents:
+      - actions:
+        - name: idle
+        name: address_generators[1]
+    - name: idle
+      subcomponents:
+      - actions:
+        - name: idle
+        name: storage
+      - actions:
+        - name: idle
+        name: address_generators[1]
+    attributes:
+      ag_datawidth: log(data_storage_depth)
+      data_storage_depth: must_specify
+      data_storage_width: must_specify
+      datawidth: memory_width
+      n_banks: must_specify
+      n_rdwr_ports: 2
+      technology: must_specify
+    name: smartbuffer
+    subcomponents:
+    - attributes:
+        avg_sparsity: avg_sparsity
+        datawidth: datawidth
+        depth: data_storage_depth
+        n_banks: n_banks
+        n_rdwr_ports: n_rdwr_ports
+        technology: technology
+        width: data_storage_width
+      class: SRAM
+      name: storage
+    - attributes:
+        technology: technology
+        width: ag_datawidth
+      class: intadder
+      name: address_generators[0..1]
+  - actions:
+    - name: mac_random
+      subcomponents:
+      - actions:
+        - name: multiply_random
+        name: multiplier
+      - actions:
+        - name: add
+        name: adder
+    - name: mac_reuse
+      subcomponents:
+      - actions:
+        - name: multiply_reuse
+        name: multiplier
+      - actions:
+        - name: add
+        name: adder
+    - name: mac_gated
+      subcomponents:
+      - actions:
+        - name: idle
+        name: multiplier
+      - actions:
+        - name: idle
+        name: adder
+    attributes:
+      datawidth: must_specify
+      technology: must_specify
+    name: mac
+    subcomponents:
+    - attributes:
+        avg_sparsity: avg_sparsity
+        datawidth: datawidth
+        technology: technology
+      class: intmultiplier
+      name: multiplier
+    - attributes:
+        datawidth: datawidth
+        technology: technology
+      class: intadder
+      name: adder
+  version: 0.3
+mapping:
+- bypass:
+  - Weights
+  - Inputs
+  keep:
+  - Outputs
+  stream: []
+  target: psum_spad
+  type: datatype
+- bypass:
+  - Inputs
+  - Outputs
+  keep:
+  - Weights
+  stream: []
+  target: weights_spad
+  type: datatype
+- bypass:
+  - Weights
+  - Outputs
+  keep:
+  - Inputs
+  stream: []
+  target: ifmap_spad
+  type: datatype
+- bypass:
+  - Weights
+  - Inputs
+  - Outputs
+  keep: []
+  stream: []
+  target: DummyBuffer
+  type: datatype
+- bypass:
+  - Weights
+  keep:
+  - Inputs
+  - Outputs
+  stream: []
+  target: shared_glb
+  type: datatype
+- bypass: []
+  keep:
+  - Weights
+  - Inputs
+  - Outputs
+  stream:
+  - Weights
+  - Inputs
+  - Outputs
+  target: DRAM
+  type: datatype
+- factors: C1 M16 R1 S1 N1 P1 Q1
+  permutation: MCRSNPQ
+  target: psum_spad
+  type: temporal
+- factors: C2 M1 R5 S1 N1 P1 Q1
+  permutation: CRMSNPQ
+  target: weights_spad
+  type: temporal
+- factors: C1 M1 R1 S1 N1 P1 Q1
+  permutation: CMRSNPQ
+  target: ifmap_spad
+  type: temporal
+- factors: C2 M1 R1 S5 N1 P1 Q1
+  permutation: SCMRNPQ
+  split: 0
+  target: DummyBuffer
+  type: spatial
+- factors: C1 M1 R1 S1 N1 P1 Q1
+  permutation: CMRSNPQ
+  target: DummyBuffer
+  type: temporal
+- factors: C1 M1 R1 S1 N1 P1 Q14
+  permutation: QCMRSNP
+  split: 1
+  target: shared_glb
+  type: spatial
+- factors: C1 M2 R1 S1 N2 P28 Q1
+  permutation: PNMCRSQ
+  target: shared_glb
+  type: temporal
+- factors: C12 M8 R1 S1 N2 P1 Q2
+  permutation: CMNQRSP
+  target: DRAM
+  type: temporal
+problem:
+  instance:
+    C: 48
+    Hdilation: 1
+    Hstride: 1
+    M: 256
+    N: 4
+    P: 28
+    Q: 28
+    R: 5
+    S: 5
+    Wdilation: 1
+    Wstride: 1
+    densities:
+      Inputs: 0.6
+      Outputs: 0.169
+      Weights: 0.385306
+  shape:
+    coefficients:
+    - default: 1
+      name: Wstride
+    - default: 1
+      name: Hstride
+    - default: 1
+      name: Wdilation
+    - default: 1
+      name: Hdilation
+    data-spaces:
+    - name: Weights
+      projection:
+      - - - C
+      - - - M
+      - - - R
+      - - - S
+    - name: Inputs
+      projection:
+      - - - N
+      - - - C
+      - - - R
+          - Wdilation
+        - - P
+          - Wstride
+      - - - S
+          - Hdilation
+        - - Q
+          - Hstride
+    - name: Outputs
+      projection:
+      - - - N
+      - - - M
+      - - - Q
+      - - - P
+      read-write: true
+    dimensions:
+    - C
+    - M
+    - R
+    - S
+    - N
+    - P
+    - Q
+    name: CNN-Layer
+sparse_optimizations:
+  targets:
+  - name: DRAM
+    representation-format:
+      data-spaces:
+      - name: Inputs
+        ranks:
+        - flattened-rankIDs:
+          - - R
+            - S
+            - P
+            - C
+            - M
+            - N
+            - Q
+          format: UOP
+        - flattened-rankIDs:
+          - - R
+            - S
+            - P
+            - C
+            - M
+            - N
+            - Q
+          format: RLE
+          payload-word-bits: 5
+      - name: Outputs
+        ranks:
+        - flattened-rankIDs:
+          - - P
+            - M
+            - N
+            - Q
+          format: UOP
+        - flattened-rankIDs:
+          - - P
+            - M
+            - N
+            - Q
+          format: RLE
+          payload-word-bits: 5
+  - action-optimization:
+    - options:
+      - condition-on:
+        - Inputs
+        target: Weights
+      type: gating
+    name: weights_spad

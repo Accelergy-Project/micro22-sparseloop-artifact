@@ -1,0 +1,13 @@
+sparse_optimizations:
+  targets:
+    - name: DRAM
+      representation-format:
+        data-spaces:
+          - name: Outputs
+            ranks:
+              - format: UOP
+                flattened-rankIDs: [ [P, M, N, Q] ]
+              - format: RLE
+                flattened-rankIDs: [ [P, M, N, Q] ]
+                payload-word-bits: 5
+

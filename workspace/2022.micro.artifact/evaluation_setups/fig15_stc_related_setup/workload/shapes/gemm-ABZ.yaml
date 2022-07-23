@@ -1,0 +1,19 @@
+shape:
+  name: gemm-ABZ 
+  dimensions: [ M, N, K ]
+  data-spaces:
+    - name: A
+      projection:
+        - [ [ M ] ]
+        - [ [ K ] ]
+
+    - name: B
+      projection:
+        - [ [ N ] ]
+        - [ [ K ] ]
+
+    - name: Z
+      projection:
+        - [ [ M ] ]
+        - [ [ N ] ]
+      read-write: True

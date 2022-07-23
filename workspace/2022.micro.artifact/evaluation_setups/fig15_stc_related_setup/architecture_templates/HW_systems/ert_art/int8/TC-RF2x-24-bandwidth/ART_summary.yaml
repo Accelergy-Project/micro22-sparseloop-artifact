@@ -1,0 +1,34 @@
+ART_summary:
+  version: 0.3
+  table_summary:
+  - name: system.DRAM
+    area: 0
+    primitive_estimations: Cacti
+  - name: system.SM.Subpartition[0..3].PE[0..255].LRF
+    area: 20.0
+    primitive_estimations:
+    - name: storage
+      estimator: 65nm_estimator
+    - name: metadata_storage
+      estimator: 65nm_estimator
+  - name: system.SM.Subpartition[0..3].PE[0..255].MAC
+    area: 687.74999
+    primitive_estimations:
+    - name: multiplier
+      estimator: 65nm_estimator
+    - name: adder
+      estimator: 65nm_estimator
+  - name: system.SM.Subpartition[0..3].RF
+    area: 48735.6
+    primitive_estimations:
+    - name: storage
+      estimator: Cacti
+    - name: metadata_storage
+      estimator: 65nm_estimator
+  - name: system.SM.SMEM
+    area: 3617260.0
+    primitive_estimations:
+    - name: storage
+      estimator: Cacti
+    - name: metadata_storage
+      estimator: Cacti

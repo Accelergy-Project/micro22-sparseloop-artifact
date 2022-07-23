@@ -1,0 +1,43 @@
+mapping:
+  - target: Reg
+    type: datatype
+    keep:
+      - Z
+    bypass:
+      - A
+      - B
+    stream:
+      []
+  - target: Buffer
+    type: datatype
+    keep:
+      - A
+      - B
+    bypass:
+      - Z
+    stream:
+      []
+  - target: BackingStorage
+    type: datatype
+    keep:
+      - A
+      - B
+      - Z
+    bypass:
+      []
+    stream:
+      - A
+      - B
+      - Z
+  - target: Reg
+    type: temporal
+    factors: M1 N1 K128
+    permutation: KMN
+  - target: Buffer
+    type: temporal
+    factors: M1 N1 K1
+    permutation: MNK
+  - target: BackingStorage
+    type: temporal
+    factors: M128 N128 K1
+    permutation: MNK

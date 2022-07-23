@@ -1,0 +1,47 @@
+sparse_optimizations:
+  targets:
+    - name: BackingStorage
+      representation-format:
+        data-spaces:
+          - name: A
+            ranks:
+              - format: UOP
+                payload-word-bits: 0
+              - format: B
+            rank-application-order: inner-to-outer
+          - name: B
+            ranks:
+              - format: UOP
+                payload-word-bits: 0
+              - format: UOP
+                payload-word-bits: 0
+              - format: B
+            rank-application-order: inner-to-outer
+
+    - name: Buffer
+      representation-format:
+        data-spaces:
+          - name: A
+            ranks:
+              - format: B
+          - name: B
+            ranks:
+              - format: UOP
+                payload-word-bits: 0
+              - format: B
+
+      action-optimization:
+        - type: gating
+          options:
+            - target: A
+              condition-on: [ B ]
+        - type: gating
+          options:
+            - target: B
+              condition-on: [ A ]
+    - name: Reg
+      action-optimization:
+        - type: gating
+          options:
+            - target: Z
+              condition-on: [ A, B ]

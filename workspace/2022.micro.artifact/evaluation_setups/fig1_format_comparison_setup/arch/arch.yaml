@@ -1,0 +1,52 @@
+architecture:
+  version: 0.3
+
+  subtree:                             # architecture level 1
+    - name: system
+      attributes:
+        technology: 45nm
+      local:
+      - name: BackingStorage              # storage component
+        class: storage
+        subclass: SRAM_MD
+        attributes:
+          data_storage_depth: 16384
+          data_storage_width: 64 
+          datawidth: 8
+          metadata_storage_depth: 16384
+          metadata_storage_width: 28
+          read_bandwidth: 8
+
+      subtree:                        # architecture level 0
+      - name: PE
+        local:
+          - name: Buffer                  # storage component
+            class: storage
+            subclass: SRAM_MD
+            attributes:
+              data_storage_depth: 512
+              data_storage_width: 8
+              datawidth: 8
+              block_size: 1
+              metadata_storage_depth: 256
+              metadata_storage_width: 28
+              n_banks: 2
+              metadata_n_banks: 2
+              write_bandwidth: 2
+              read_bandwidth: 2
+
+          - name: Reg
+            class: storage
+            subclass: reg
+            attributes:
+              data_storage_depth: 1
+              data_storage_width: 8
+              datawidth: 8
+              write_bandwidth: 1
+              read_bandwidth: 1
+          
+          - name: MAC                    # compute component
+            class: compute
+            subclass: intmac
+            attributes:
+              datawidth: 8

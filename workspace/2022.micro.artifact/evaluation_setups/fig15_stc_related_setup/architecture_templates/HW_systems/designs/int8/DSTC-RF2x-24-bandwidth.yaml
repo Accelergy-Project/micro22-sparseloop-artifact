@@ -1,0 +1,81 @@
+architecture:
+  version: 0.3
+  subtree:
+    - name: system
+      attributes: 
+        technology: 45nm
+      
+      local:
+        - name: DRAM
+          class: DRAM
+          attributes:
+            type: LPDDR4
+            width: 64
+            metadata_storage_width: 64
+            datawidth: 8
+            cluster-size: 1
+            read_bandwidth: 32
+            write_bandwidth: 32
+      
+      subtree:
+        - name: SM
+          local:
+            - name: SMEM 
+              class: storage
+              subclass: SRAM_MD
+              attributes:
+                data_storage_depth: 4096 # 65536
+                data_storage_width: 512
+                metadata_storage_depth: 8192
+                metadata_storage_width: 64
+                n_banks: 2
+                n_rdwr_ports: 2
+                datawidth: 8
+                cluster-size: 1
+                read_bandwidth: 42
+                write_bandwidth: 42
+         
+          subtree:
+            - name: Subparition[0..3]
+              local:
+                - name: RF
+                  class: storage
+                  subclass: SRAM_MD
+                  attributes:
+                    # to accommodate for a dense Z with M=32 N=32
+                    # and two operand A, B's occupancy
+                    data_storage_depth: 2048
+                    data_storage_width: 8
+                    control_queue_depth: 16
+                    n_banks: 16
+                    n_rdwr_ports: 2
+                    metadata_storage_width: 16
+                    metadata_storage_depth: 128
+                    datawidth: 8
+                    cluster-size: 1
+                    meshY: 4
+                    meshX: 1
+                    write_bandwidth: 257 # we allow fill and update to happen at the same time, so give a little extra bandwidth
+                    read_bandwidth: 256
+                
+                - name: LRF
+                  class: storage
+                  subclass: SRAM_MD
+                  attributes:                    
+                    data_storage_depth: 64
+                    data_storage_width: 16
+                    datawidth: 8
+                    metadata_storage_width: 4
+                    metadata_storage_depth: 32
+                    cluster-size: 1
+                    meshY: 4
+                    meshX: 1
+
+                - name: MAC[0..255]
+                  class: compute
+                  subclass: Imac
+                  attributes:
+                    datawidth: 8
+                    meshY: 64
+                    meshX: 16                
+

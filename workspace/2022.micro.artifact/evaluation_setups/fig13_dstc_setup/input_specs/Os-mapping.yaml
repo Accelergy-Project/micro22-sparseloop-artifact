@@ -1,0 +1,59 @@
+mapping:  
+
+#
+# DRAM
+#
+- target: DRAM
+  type: temporal
+  permutation: KNM
+  factors: K=1 N=128 M=128    
+
+#
+# GLB
+#
+
+- target: GLB
+  type: temporal
+  factors: K=1 N=1 M=1
+  permutation: KNM
+
+- target: GLB
+  type: bypass
+  bypass: [ Z ]
+  keep: [ A, B ]
+
+#
+# Buffer
+#
+
+- target: Buffer
+  type: temporal
+  factors: K=4096 N=1 M=1 
+  permutation: NMK
+
+- target: Buffer
+  type: bypass
+  keep: [ Z ]
+  bypass: [ A, B ]
+
+
+#
+# LineBuffer
+#
+
+- target: LineBuffer
+  type: bypass
+  keep: [ A, B ]
+  bypass: [  Z ]
+
+- target: LineBuffer
+  type: temporal
+  factors: K=1 N=2 M=4 
+  permutation: NMK
+
+- target: LineBuffer
+  type: spatial
+  no_link_transfer: [ A, B, Z]
+  factors: K=1 N=16 M=8 
+  permutation: NKM
+  split: 1

@@ -1,0 +1,64 @@
+designs:
+     
+      
+  TC:
+    WD:
+      1.0: "dense"
+      0.5: "dense"
+      0.4375: "dense"
+      0.375: "dense"
+      0.3125: "dense"
+      0.3333: "dense"
+      0.25: "dense"
+    IAD:
+      granularity: "dense"
+
+  DSTC:
+    WD:
+      1.0: "dense"
+      0.5: "A-U0.5"
+      0.4375: "A-U0.4375"
+      0.375: "A-U0.375"
+      0.333: "A-U0.3333"
+      0.3333: "A-U0.3333"
+      0.3125: "A-U0.3125"
+      0.25: "A-U0.25"
+    IAD:
+      granularity: "any"
+  
+  STC:
+    WD:
+      1.0: "dense"
+      0.5: "2:4"
+      0.4375: "2:4"
+      0.375: "2:4"
+      0.3333: "2:4"
+      0.3125: "2:4"
+      0.25: "2:4"
+    IAD:
+      granularity: "dense"
+
+  
+  STC_flexible:
+    WD:
+      1.0: "dense"
+      0.5: "2:4"
+      0.4375: "7:16"
+      0.375: "3:8"
+      0.3333: "2:6"
+      0.3125: "5:16"
+      0.25: "2:8"
+    IAD:
+      granularity: "dense"
+  
+  STC_flexible_dualCompress:
+    WD:
+      1.0: "dense"
+      0.5: "2:4"
+      0.4375: "7:16"
+      0.375: "3:8"
+      0.3333: "2:6"
+      0.3125: "5:16"
+      0.25: "2:8"
+    IAD:
+      granularity: "any"

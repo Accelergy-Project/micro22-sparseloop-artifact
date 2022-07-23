@@ -1,0 +1,30 @@
+design_points:
+  - design_name: TC-RF2x-24-bandwidth
+    configurations:
+      dataflow: FlexibleGH-Ms-constraints
+  - design_name: STC-RF2x-24-bandwidth
+    configurations:
+      dataflow: FlexibleGH-Ms-constraints
+      sparse_optimizations: RF-spatial-skipping
+      representation: "CP" 
+  - design_name: DSTC-RF2x-24-bandwidth
+    configurations:
+      dataflow: DSTC-Os-constraints
+      sparse_optimizations: LRF-PosTiling 
+      representation: "B"
+  - design_name: STC_flexible-RF2x-24-bandwidth
+    configurations:
+      dataflow: FlexibleGH-Ms-constraints
+      sparse_optimizations: RF-spatial-skipping
+      representation: "CP" 
+  - design_name: STC_flexible-RF2x-24-bandwidth-RLE
+    configurations:
+      dataflow: FlexibleGH-Ms-constraints
+      sparse_optimizations: RF-spatial-skipping
+      representation: "RLE"  
+  - design_name: STC_flexible_dualCompress-RF2x-24-bandwidth-RLE
+    configurations:
+      dataflow: FlexibleGH-Ms-constraints
+      sparse_optimizations: RF-spatial-skipping-compressAB
+      representation: "RLE"  
+

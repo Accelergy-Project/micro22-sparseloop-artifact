@@ -1,0 +1,69 @@
+architecture_constraints:
+  targets:
+    
+    #
+    # DRAM
+    #
+    - target: DRAM
+      type: temporal
+      permutation: KNM
+      factors: K=1    
+
+    #
+    # SMEM
+    #
+
+    - target: SMEM
+      type: temporal
+      factors: K=1 
+      permutation: KNM
+
+    # 4 partitions mapped to M or N
+    - target: SMEM
+      type: spatial
+      factors: K=1 M=2 N=2
+      permutation: NKM
+
+    - target: SMEM
+      type: bypass
+      bypass: [ Z ]
+      keep: [ A, B ]
+    
+    #
+    # RF
+    #
+
+    # RF share the same M, N factor as LRF as LRF only store A and B not Z
+    - target: RF
+      type: temporal
+      factors: N=1 M=1 
+      permutation: NMK
+
+    - target: RF
+      type: bypass
+      keep: [ Z ]
+      bypass: [ A, B ]
+
+
+    #
+    # LRF
+    #
+
+    - target: LRF
+      type: bypass
+      keep: [ A, B ]
+      bypass: [ Z ]
+
+    # explore N and M bounds based on the available RF capacity
+    - target: LRF
+      type: temporal
+      factors: K=1    
+      permutation: NMK
+
+    # the exact fanout of the hardware (works together with the position space tiling opt) 
+    - target: LRF
+      type: spatial
+      no_link_transfer: [ A, B, Z]
+      factors: K=1 N=16 M=16 
+      permutation: NKM
+      split: 1

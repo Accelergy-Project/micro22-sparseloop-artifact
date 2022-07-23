@@ -1,0 +1,21 @@
+# Raw data extracted from Dual-side Tensor core paper Fig21
+# hierarchitcal map
+#   first key: A density
+#   second key: B density
+
+1.0:
+  1.0: 4600
+  0.4: 2500
+0.9:
+  1.0: 4163
+  0.4: 2300
+0.7:
+  1.0: 3300
+  0.4: 1820
+0.5:
+  1.0: 2690
+  0.4: 1480
+0.3:
+  1.0: 1930
+  0.4: 1100
+

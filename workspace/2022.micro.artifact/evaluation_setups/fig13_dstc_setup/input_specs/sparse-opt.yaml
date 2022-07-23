@@ -1,0 +1,90 @@
+sparse_optimizations:
+  targets:
+    - name: DRAM
+      representation-format:
+        data-spaces:
+          - name: A          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: B
+              - format: B
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [M] ]
+          - name: B          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: B
+              - format: B
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [N] ]
+   
+    - name: GLB
+      representation-format:
+        data-spaces:
+          - name: A          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: B
+              - format: B
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [M] ]
+          - name: B          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+              - format: UOP
+              - format: UOP
+              - format: B
+              - format: B
+                metadata-word-bits: 1
+                flattened_rankIDs: [ [N] ]
+      
+    
+    - name: Buffer
+      action-optimization:
+        - type: skipping
+          target: Z
+          condition-on: [ A, B ]
+      
+    - name: LineBuffer
+      representation-format:
+        data-spaces:
+          - name: B          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+              - format: UOP
+              - format: B
+                metadata-word-bits: 1
+              - format: B
+                metadata-word-bits: 1
+          - name: A          
+            rank-application-order: inner-to-outer
+            ranks:
+              - format: UOP
+              - format: UOP
+              - format: B
+                metadata-word-bits: 1
+              - format: B
+                metadata-word-bits: 1
+ 
+      action-optimization:
+        - type: position-skipping
+          target: A
+          condition-on: []
+        - type: position-skipping
+          target: B
+          condition-on: []

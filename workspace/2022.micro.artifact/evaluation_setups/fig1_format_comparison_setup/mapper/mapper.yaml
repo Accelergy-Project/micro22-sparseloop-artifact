@@ -1,0 +1,8 @@
+mapper:
+  algorithm: linear-pruned
+  live-status: false
+  num-threads: 1
+  optimization-metrics: [ delay, energy ]
+  timeout: 20
+  victory-condition: 20
+

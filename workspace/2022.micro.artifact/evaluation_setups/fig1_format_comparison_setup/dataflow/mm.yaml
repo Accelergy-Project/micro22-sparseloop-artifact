@@ -1,0 +1,26 @@
+architecture_constraints:
+  targets:
+  - target: BackingStorage 
+    type: temporal         
+    factors: K=1 M=0 N=0 
+    permutation: MN 
+  
+  - target: Buffer
+    type: temporal
+    factors: K=1 M=1 
+    permutation: NKM
+
+  - target: Buffer
+    type: bypass
+    keep: [ A, B ]
+    bypass: [ Z ]
+  
+  - target: Reg
+    type: temporal
+    factors: K=0 M=1 N=1
+    permutation: NKM
+
+  - target: Reg
+    type: bypass
+    keep: [ Z ]
+    bypass: [ A, B ]

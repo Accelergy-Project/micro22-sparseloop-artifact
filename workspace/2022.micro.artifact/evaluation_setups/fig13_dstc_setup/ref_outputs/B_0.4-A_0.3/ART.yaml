@@ -1,0 +1,13 @@
+ART:
+  version: 0.3
+  tables:
+  - name: system.DRAM
+    area: 0
+  - name: system.SM.OTC.Buffer
+    area: 8026.18
+  - name: system.SM.OTC.LineBuffer
+    area: 1309.6
+  - name: system.SM.OTC.MAC[0..127]
+    area: 1239.5
+  - name: system.SM.GLB
+    area: 2079246.0
