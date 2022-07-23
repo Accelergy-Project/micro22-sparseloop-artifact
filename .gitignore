@@ -132,6 +132,7 @@ dmypy.json
 **/outputs/**
 **/csv_results/*.csv
 !**/outputs/.gitkeep
+docker-compose.yaml
 
 # Docker generated
 **/.bash_aliases
