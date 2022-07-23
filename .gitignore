@@ -127,3 +127,19 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Project related
+**/outputs/**
+**/csv_results/*.csv
+!**/outputs/.gitkeep
+
+# Docker generated
+**/.bash_aliases
+**/.bashrc
+**/.cache
+**/.ipython
+**/.local
+**/.profile
+**/.jupyter
+**/.bash_history
+**/.config/
