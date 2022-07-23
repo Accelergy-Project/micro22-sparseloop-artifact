@@ -10,6 +10,9 @@ This repository provides the evaluation setups for MICRO22 artifact evaluation f
 git clone git@github.com:nellie-wu/micro22-sparseloop-artifact.git
 ```
 
+### System requirement
+- Please install [docker app](https://www.docker.com/products/docker-desktop/)
+
 ### Use Docker
 
 *We also provide [instructions](#build-docker-from-scratch) to build the docker from sratch, but directly using the online docker image as instructed below is recommended.*
