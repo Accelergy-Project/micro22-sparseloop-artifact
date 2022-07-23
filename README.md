@@ -10,7 +10,7 @@ This repository provides the evaluation setups for MICRO22 artifact evaluation f
 git clone git@github.com:nellie-wu/micro22-sparseloop-artifact.git
 ```
 
-### Using Docker
+### Use Docker
 
 *We also provide [instructions](#build-docker-from-scratch) to build the docker from sratch, but directly using the online docker image as instructed below is recommended.*
 
@@ -22,7 +22,7 @@ git clone git@github.com:nellie-wu/micro22-sparseloop-artifact.git
 to a web browser of your choice to access the workspace. 
 - If the webpage does not work, please try the tourble shooting notes in `docker-compose.yaml`.
 
-### Running Experiments
+### Run Experiments
 
 We provide a jupyter notebook for the experiments.  Please navigate to `workspace/2022.micro.artifact/notebook` and follow the instructions in the notebook to run the experiments. 
 
