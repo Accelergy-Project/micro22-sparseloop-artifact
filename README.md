@@ -1,6 +1,6 @@
 # MICRO22 Sparseloop Artifact
 
-This repository provides the evaluation setups for MICRO22 artifact evaluation for the paper *Sparseloop: An Analytical Modeling Approach to Sparse Tensor Accelerators*. We provide a docker environment and a jupyter notebook for the artifect evlauation. 
+This repository provides the evaluation setups for MICRO22 artifact evaluation for the paper *Sparseloop: An Analytical Modeling Approach to Sparse Tensor Accelerators*. We provide a docker environment and a jupyter notebook for the artifect evlauation. Please contact nelliewu@mit.edu if there are any questions.
 
 ## Perform artifact evaluation
 
