@@ -1,0 +1,66 @@
+problem:
+  instance:
+    C: 512
+    E: 4
+    F: 4
+    G: 1
+    M: 512
+    N: 1
+    R: 1
+    S: 1
+    densities:
+      Inputs:
+        data_file_path: /home/nelliewu/research/workspace/sparse-modeling/micro22-sparseloop-artifact/workspace/2022.micro.artifact/evaluation_setups/fig12_eyerissv2_pe_setup/scripts/../workload/mobilenet0.5-sparse/actual_data/actual_data_masks/L27_iacts.txt
+        distribution: real-data
+      Weights:
+        data_file_path: /home/nelliewu/research/workspace/sparse-modeling/micro22-sparseloop-artifact/workspace/2022.micro.artifact/evaluation_setups/fig12_eyerissv2_pe_setup/scripts/../workload/mobilenet0.5-sparse/actual_data/actual_data_masks/L27_weights.txt
+        distribution: real-data
+  shape:
+    coefficients:
+    - default: 1
+      name: Wstride
+    - default: 1
+      name: Hstride
+    - default: 1
+      name: Wdilation
+    - default: 1
+      name: Hdilation
+    data-spaces:
+    - name: Weights
+      projection:
+      - - - C
+      - - - M
+      - - - G
+      - - - R
+      - - - S
+    - name: Inputs
+      projection:
+      - - - N
+      - - - C
+      - - - G
+      - - - R
+          - Wdilation
+        - - E
+          - Wstride
+      - - - S
+          - Hdilation
+        - - F
+          - Hstride
+    - name: Outputs
+      projection:
+      - - - N
+      - - - G
+      - - - M
+      - - - F
+      - - - E
+      read-write: true
+    dimensions:
+    - R
+    - S
+    - E
+    - F
+    - C
+    - M
+    - N
+    - G
+    name: grouped-CONV

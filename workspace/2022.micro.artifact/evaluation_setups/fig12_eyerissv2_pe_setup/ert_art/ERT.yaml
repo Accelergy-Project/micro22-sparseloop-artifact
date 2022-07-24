@@ -1,0 +1,151 @@
+ERT:
+  version: 0.3
+  tables:
+  - name: eyeriss_v2_PE.PE.psum_spad
+    actions:
+    - name: read
+      arguments:
+        address_delta: 0
+        data_delta: 0
+      energy: 0.00801
+    - name: read
+      arguments:
+        address_delta: 0
+        data_delta: 1
+      energy: 0.18061
+    - name: read
+      arguments:
+        address_delta: 1
+        data_delta: 0
+      energy: 0.15247
+    - name: read
+      arguments:
+        address_delta: 1
+        data_delta: 1
+      energy: 0.32508
+    - name: write
+      arguments:
+        address_delta: 0
+        data_delta: 0
+      energy: 0.00801
+    - name: write
+      arguments:
+        address_delta: 0
+        data_delta: 1
+      energy: 0.18061
+    - name: write
+      arguments:
+        address_delta: 1
+        data_delta: 0
+      energy: 0.15247
+    - name: write
+      arguments:
+        address_delta: 1
+        data_delta: 1
+      energy: 0.32508
+    - name: idle
+      arguments: null
+      energy: 0.00801
+  - name: eyeriss_v2_PE.PE.iact_spad
+    actions:
+    - name: write
+      arguments: null
+      energy: 0.13003
+    - name: read
+      arguments: null
+      energy: 0.13003
+    - name: gated_write
+      arguments: null
+      energy: 0.0032
+    - name: gated_read
+      arguments: null
+      energy: 0.0032
+    - name: metadata_read
+      arguments: null
+      energy: 0.14934
+    - name: metadata_write
+      arguments: null
+      energy: 0.14934
+    - name: gated_metadata_read
+      arguments: null
+      energy: 0.00195
+    - name: gated_metadata_write
+      arguments: null
+      energy: 0.00195
+  - name: eyeriss_v2_PE.PE.weight_spad
+    actions:
+    - name: write
+      arguments: null
+      energy: 0.51919
+    - name: read
+      arguments: null
+      energy: 0.47678
+    - name: gated_write
+      arguments: null
+      energy: 1.0e-05
+    - name: gated_read
+      arguments: null
+      energy: 1.0e-05
+    - name: metadata_read
+      arguments: null
+      energy: 0.88442
+    - name: metadata_write
+      arguments: null
+      energy: 0.88442
+    - name: gated_metadata_read
+      arguments: null
+      energy: 0.00635
+    - name: gated_metadata_write
+      arguments: null
+      energy: 0.00635
+  - name: eyeriss_v2_PE.PE.reg
+    actions:
+    - name: write
+      arguments: null
+      energy: 0.072
+    - name: read
+      arguments: null
+      energy: 0.072
+    - name: gated_write
+      arguments: null
+      energy: 0.00296
+    - name: gated_read
+      arguments: null
+      energy: 0.00296
+    - name: metadata_read
+      arguments: null
+      energy: 0.036
+    - name: metadata_write
+      arguments: null
+      energy: 0.036
+    - name: gated_metadata_read
+      arguments: null
+      energy: 0.00148
+    - name: gated_metadata_write
+      arguments: null
+      energy: 0.00148
+  - name: eyeriss_v2_PE.PE.MAC
+    actions:
+    - name: mac_random
+      arguments: null
+      energy: 0.5608
+    - name: mac_gated
+      arguments: null
+      energy: 0.01798
+    - name: mac_skipped
+      arguments: null
+      energy: 0.01798
+  - name: eyeriss_v2_PE.BackingStorage
+    actions:
+    - name: write
+      arguments: null
+      energy: 0
+    - name: read
+      arguments: null
+      energy: 0
+    - name: metadata_read
+      arguments: null
+      energy: 0
+    - name: metadata_write
+      arguments: null
+      energy: 0

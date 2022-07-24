@@ -1,0 +1,97 @@
+# sparse config for dense input activations and sparse weights
+
+sparse_optimizations:
+  targets:
+  - name: BackingStorage
+    representation-format:
+      data-spaces:
+        - name: Inputs
+          ranks:
+            - format: UOP             # G
+              payload-word-bits:  0
+            - format: UOP             # C1
+              payload-word-bits:  0
+            - format: UOP             # M1
+              payload-word-bits:  0
+            - format: UOP             
+              flattened-rankIDs: [ [ S, F ] ]
+              payload-word-bits:  0
+            - format: UOP             
+              flattened-rankIDs: [ [ E, N ] ]
+              payload-word-bits:  0
+            - format: UOP             
+              payload-word-bits:  4
+              flattened-rankIDs: [ [ R ] ] 
+            - format: RLE             
+              metadata-word-bits: 4
+              flattened-rankIDs: [ [ C ] ] 
+          rank-application-order: inner-to-outer
+        - name: Weights
+          ranks:
+            - format: UOP            # G
+              payload-word-bits:  0
+            - format: UOP            # M
+              payload-word-bits:  0
+            - format: UOP            # S  
+              payload-word-bits:  0            
+            - format: UOP            # C 
+              payload-word-bits:  0            
+            - format: UOP
+              payload-word-bits:  7
+              flattened-rankIDs: [ [ C, R ] ] 
+            - format: RLE
+              metadata-word-bits: 4
+              flattened-rankIDs: [ [ M  ] ]
+          rank-application-order: inner-to-outer
+
+  - name: iact_spad
+    representation-format:
+      data-spaces:
+        - name: Inputs
+          ranks: 
+            - format: UOP             
+              payload-word-bits:  4
+              flattened-rankIDs: [ [ R ] ] 
+            - format: RLE             # C0
+              metadata-word-bits: 4
+              flattened-rankIDs: [ [ C ] ] 
+          rank-application-order: inner-to-outer
+  
+  - name: weight_spad
+    representation-format:
+      data-spaces:
+        - name: Weights
+          ranks:
+            - format: UOP
+              payload-word-bits:  7
+              flattened-rankIDs: [ [ C, R ] ] 
+            - format: RLE
+              metadata-word-bits: 4
+              flattened-rankIDs: [ [ M  ] ]
+          rank-application-order: inner-to-outer
+    action-optimization:
+      - type: skipping
+        options:
+          - target: Weights
+            condition-on: [ Inputs ]
+
+  - name: psum_spad
+    action-optimization:
+      - type: skipping
+        options:
+          - target: Outputs
+            condition-on: [ Inputs, Weights ]
+          
+  - name: reg
+    representation-format:
+      data-spaces:
+        - name: Inputs
+          ranks: 
+            - format: RLE
+              metadata-word-bits: 4
+          rank-application-order: inner-to-outer
+
+  - name: MAC
+    compute-optimization:
+    - type: skipping
+

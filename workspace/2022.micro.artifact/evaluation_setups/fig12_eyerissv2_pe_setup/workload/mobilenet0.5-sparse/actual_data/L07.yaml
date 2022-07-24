@@ -1,0 +1,66 @@
+problem:
+  instance:
+    C: 64
+    E: 32
+    F: 32
+    G: 1
+    M: 64
+    N: 1
+    R: 1
+    S: 1
+    densities:
+      Inputs:
+        data_file_path: actual_data_masks/L07_iacts.txt
+        distribution: real-data
+      Weights:
+        data_file_path: actual_data_masks/L07_weights.txt
+        distribution: real-data
+  shape:
+    coefficients:
+    - default: 1
+      name: Wstride
+    - default: 1
+      name: Hstride
+    - default: 1
+      name: Wdilation
+    - default: 1
+      name: Hdilation
+    data-spaces:
+    - name: Weights
+      projection:
+      - - - C
+      - - - M
+      - - - G
+      - - - R
+      - - - S
+    - name: Inputs
+      projection:
+      - - - N
+      - - - C
+      - - - G
+      - - - R
+          - Wdilation
+        - - E
+          - Wstride
+      - - - S
+          - Hdilation
+        - - F
+          - Hstride
+    - name: Outputs
+      projection:
+      - - - N
+      - - - G
+      - - - M
+      - - - F
+      - - - E
+      read-write: true
+    dimensions:
+    - R
+    - S
+    - E
+    - F
+    - C
+    - M
+    - N
+    - G
+    name: grouped-CONV

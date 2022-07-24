@@ -1,0 +1,61 @@
+architecture:
+  version: 0.3
+  subtree:
+    - name: eyeriss_v2_PE
+      attributes:
+        technology: 45nm
+      local:
+        - name: BackingStorage
+          class: DRAM  # a storage with inifinite capacity, so DRAM in timeloop repr
+          subclass: DummyStorage
+          attributes:
+            width: 64
+            block_size: 8
+            datawidth: 8
+            metadata_storage_width: 8
+
+      subtree:
+        - name: PE
+          local:
+            - name: iact_spad
+              class: storage
+              subclass: SRAM_MD 
+              attributes:
+                data_storage_depth: 16
+                data_storage_width: 8
+                metadata_storage_depth: 25  # 25  # 9 addr entries, 16 run entries   
+                metadata_storage_width: 4
+                datawidth: 8
+                block_size: 1
+            - name: weight_spad
+              class: storage
+              subclass: SRAM_MD
+              attributes:
+                data_storage_depth: 192      
+                data_storage_width: 8
+                metadata_storage_depth: 128  # 16 7b addr entries, 192 4b run entries
+                metadata_storage_width: 8
+                datawidth: 8
+                block_size: 1
+            - name: psum_spad
+              class: storage
+              subclass: SRAM
+              attributes:
+                depth: 32
+                width: 20
+                datawidth: 20
+                block_size: 1
+            - name: reg
+              class: storage
+              subclass: SRAM_MD # we use sram for regfile, sram, and reg, the plug-in uses the right energy number
+              attributes:
+                data_storage_depth: 1
+                data_storage_width: 8
+                metadata_storage_width: 4
+                metadata_storage_depth: 1
+                datawidth: 8
+            - name: MAC
+              class: compute
+              subclass: Imac
+              attributes:
+                datawidth: 8

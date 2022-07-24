@@ -1,0 +1,41 @@
+ART_summary:
+  version: 0.3
+  table_summary:
+  - name: eyeriss_v2_PE.PE.psum_spad
+    area: 1020.59
+    primitive_estimations: Cacti
+  - name: eyeriss_v2_PE.PE.iact_spad
+    area: 485.1975
+    primitive_estimations:
+    - name: storage
+      estimator: Aladdin_table
+    - name: metadata_storage
+      estimator: Aladdin_table
+  - name: eyeriss_v2_PE.PE.weight_spad
+    area: 3013.83
+    primitive_estimations:
+    - name: storage
+      estimator: Cacti
+    - name: metadata_storage
+      estimator: Aladdin_table
+  - name: eyeriss_v2_PE.PE.reg
+    area: 71.76
+    primitive_estimations:
+    - name: storage
+      estimator: Aladdin_table
+    - name: metadata_storage
+      estimator: Aladdin_table
+  - name: eyeriss_v2_PE.PE.MAC
+    area: 332.25
+    primitive_estimations:
+    - name: multiplier
+      estimator: Aladdin_table
+    - name: adder
+      estimator: Aladdin_table
+  - name: eyeriss_v2_PE.BackingStorage
+    area: 0
+    primitive_estimations:
+    - name: storage
+      estimator: 65nm_estimator
+    - name: metadata_storage
+      estimator: 65nm_estimator

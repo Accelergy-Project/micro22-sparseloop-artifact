@@ -1,0 +1,53 @@
+problem:
+  shape:
+    name: "grouped-CONV"
+    dimensions: [ R, S, E, F, C, M, N, G ]
+    coefficients:
+      - name: Wstride
+        default: 1
+      - name: Hstride
+        default: 1
+      - name: Wdilation
+        default: 1
+      - name: Hdilation
+        default: 1
+        
+    data-spaces:
+      - name: Weights
+        projection:
+          - [ [C] ]
+          - [ [M] ]
+          - [ [G] ]
+          - [ [R] ]
+          - [ [S] ]
+      - name: Inputs
+        projection:
+          - [ [N] ]
+          - [ [C] ]
+          - [ [G] ]
+          - [ [R, Wdilation], [E, Wstride] ] # SOP form: R*Wdilation + P*Wstride
+          - [ [S, Hdilation], [F, Hstride] ] # SOE form: S*Hdilation + F*Hstride 
+      - name: Outputs
+        projection:
+          - [ [N] ]
+          - [ [G] ]  
+          - [ [M] ]
+          - [ [F] ]
+          - [ [E] ]
+        read-write: True
+  instance: 
+    M: 512   
+    E: 4   
+    F: 4   
+    R: 1   
+    S: 1   
+    N: 1   
+    G: 1   
+    C: 512   
+    densities: 
+      Inputs: 
+        distribution: hypergeometric
+        density: 0.58 
+      Weights: 
+        distribution: hypergeometric
+        density: 0.30 
