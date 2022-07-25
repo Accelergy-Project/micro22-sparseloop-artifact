@@ -1,0 +1,8 @@
+[submodule "docker/timeloop-accelergy-pytorch"]
+	path = docker/timeloop-accelergy-pytorch
+	url = git@github.com:Accelergy-Project/timeloop-accelergy-pytorch.git
+	branch = micro22-artifact
+[submodule "docker/accelergy-timeloop-infrastructure"]
+	path = docker/accelergy-timeloop-infrastructure
+	url = git@github.com:Accelergy-Project/accelergy-timeloop-infrastructure.git
+	branch = micro22-artifact
