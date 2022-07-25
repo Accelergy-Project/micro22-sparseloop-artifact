@@ -50,7 +50,7 @@ We provide two ways to get the docker.
   ```
   To check if the image is buit successfully, please do `docker image ls` and you should see `mitdlh/timeloop-accelergy-pytorch` with a tag name `micro22-artifact` listed. 
 
-### Step2: Get the docker running
+### Step2: Start the docker
 --------------------
 
 - Examine the instructions in `docker-compose.yaml` to setup the docker correctly, e.g., setup the correct `UID` and `GID`.
