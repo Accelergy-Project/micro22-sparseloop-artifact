@@ -8,7 +8,7 @@ This repository provides the evaluation setups for MICRO22 artifact evaluation f
 
 ## Perform artifact evaluation
 
-### **Recursively** clone repo and prepare your docker compose
+### **Recursively** clone repo
 
 ```
 git clone --recurse-submodules git@github.com:nellie-wu/micro22-sparseloop-artifact.git
