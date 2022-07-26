@@ -1,6 +1,6 @@
 # MICRO22 Sparseloop Artifact
 
-This repository provides the evaluation setups for MICRO22 artifact evaluation for the paper *Sparseloop: An Analytical Modeling Approach to Sparse Tensor Accelerators*. We provide a docker environment and a jupyter notebook for the artifect evlauation. Please contact nelliewu@mit.edu if there are any questions.
+This repository provides the evaluation setups for MICRO22 artifact evaluation for the paper *Sparseloop: An Analytical Modeling Approach to Sparse Tensor Accelerators*. We provide a docker environment and a jupyter notebook for the artifect evlauation. Please contact timeloop-accelergy@mit.edu if there are any questions.
 
 ## System requirement
 ---------------------
@@ -11,7 +11,7 @@ This repository provides the evaluation setups for MICRO22 artifact evaluation f
 ### **Recursively** clone repo
 
 ```
-git clone --recurse-submodules git@github.com:nellie-wu/micro22-sparseloop-artifact.git
+git clone --recurse-submodules git@github.com:Accelergy-Project/micro22-sparseloop-artifact.git
 cd <cloned repo>
 ls docker/
 ```
