@@ -19,7 +19,6 @@ ls docker/
 You should see the subdirectories in `docker/` populated with actual source code instead of submodule pointers.
 
 
-
 ### Step 0: Prepare your docker compose
 -------------------------
 
@@ -49,6 +48,7 @@ We provide two options for obtaining the docker image. Please choose one of the 
   ```
   cd ../timeloop-accelergy-pytorch
   make
+  cd ../../  # go back to root directory of the repo
   ```
 
 To check if the image is obtained successfully, please do `docker image ls` and you should see `mitdlh/timeloop-accelergy-pytorch` with a tag name `micro22-artifact` listed. 
