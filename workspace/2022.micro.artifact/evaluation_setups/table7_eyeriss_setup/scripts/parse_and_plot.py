@@ -11,7 +11,7 @@ sys.path.append(os.path.join(this_directory, "..", "..", "utils"))
 from parse_timeloop_output import parse_timeloop_stats
 from sweep import workload_dir_path
 
-def main(timeloop_prefix):
+def main(stats_prefix):
     
     stats_collector = {}
     job_names = ["alexnet_conv1", "alexnet_conv2", "alexnet_conv3", "alexnet_conv4", "alexnet_conv5"]
@@ -34,7 +34,7 @@ def main(timeloop_prefix):
         baseline_dense_output_stats = parse_timeloop_stats(os.path.join(baseline_dense_path, "output", timeloop_prefix + ".map+stats.xml"))
         baseline_DRAM_accesses = sum(j for j in baseline_dense_output_stats["energy_breakdown_pJ"]["DRAM"]["actual_accesses_per_instance"])
         
-        job_output_stats = parse_timeloop_stats(os.path.join(job_info["path"], "output", timeloop_prefix + ".map+stats.xml"))
+        job_output_stats = parse_timeloop_stats(os.path.join(job_info["path"], "output", stats_prefix + ".map+stats.xml"))
         job_DRAM_weight_accesses =  job_output_stats["energy_breakdown_pJ"]["DRAM"]["actual_accesses_per_instance"][0]
         job_DRAM_iact_accesses =  job_output_stats["energy_breakdown_pJ"]["DRAM"]["actual_accesses_per_instance"][1]
         job_DRAM_oact_accesses =  job_output_stats["energy_breakdown_pJ"]["DRAM"]["actual_accesses_per_instance"][2]
@@ -52,7 +52,7 @@ def main(timeloop_prefix):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser("parse result to get DRAM compression ratio for Eyeriss. Usage: python3 parse_and_plot.py")
-    parser.add_argument('--timeloop_prefix', type=str, default="timeloop-model", help='the output prefix that the parser to be looking for' )
+    parser.add_argument('--stats_prefix', type=str, default="timeloop-model", help='the output prefix that the parser to be looking for' )
     parser.add_argument('-o', '--output_dir', type=str, default=os.path.join(this_directory, "..", "outputs"), help='abs path to top level output directory that needs to be parsed' )
     options = parser.parse_args()
     OUT_DIR = options.output_dir

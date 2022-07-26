@@ -7,7 +7,7 @@ do
   for sparse_setup in  "coordinate_list" "bitmask"  
   do
     out_dir_name="output_${d}_${sparse_setup}"
-    if [[ ! -d /etc ]]
+    if [[ ! -d ../outputs/${out_dir_name} ]]
     then
       mkdir ../outputs/${out_dir_name}
     fi
