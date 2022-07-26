@@ -7,7 +7,10 @@ do
   for sparse_setup in  "coordinate_list" "bitmask"  
   do
     out_dir_name="output_${d}_${sparse_setup}"
-    mkdir ../outputs/${out_dir_name}
+    if [[ ! -d /etc ]]
+    then
+      mkdir ../outputs/${out_dir_name}
+    fi
     timeloop-mapper ../arch/*.yaml ../dataflow/*.yaml ../sparse-opt/${sparse_setup}.yaml  ../mapper/*.yaml  ../workload/${prob_file_name} ../ert_art/*.yaml -o ../outputs/${out_dir_name}/
   done
 done
