@@ -565,7 +565,7 @@ parser.add_argument('--layer_idx', type=int, default=None, help='specific layer 
 parser.add_argument('--density_degrees', nargs = "*", type=float, default=[1.0, 0.5, 0.3333, 0.25], help='weight density degrees to run')
 parser.add_argument('--max_layers', type=int, default=100, help='max number of layers to run')
 parser.add_argument('-v', '--verbose', action="store_true")
-parser.add_argument('--use_mapper', action="store_true", help="explore mappings instead of use the mappings already found")
+parser.add_argument('--search_mapping', action="store_true", help="explore mappings instead of use the mappings already found")
 options = parser.parse_args()
 
 # global vars
@@ -573,7 +573,7 @@ MAX_LAYERS = options.max_layers
 OVERWRITE = True
 VERBOSE = options.verbose
 PRECISION = "int8"
-USE_MODEL = not options.use_mapper
+USE_MODEL = not options.search_mapping
 
 # case study is performed on selected resnet50 layers
 workload = "resnet50_selected"
