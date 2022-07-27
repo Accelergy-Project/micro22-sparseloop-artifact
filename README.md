@@ -19,7 +19,7 @@ ls docker/
 You should see the subdirectories in `docker/` populated with actual source code instead of submodule pointers.
 
 
-### Step 0: Prepare your docker compose
+### Step 0: Prepare your `docker-compose.yaml`
 -------------------------
 
 - Create a docker compose file by making a copy of the docker compose tempalte file `cp docker-compose.yaml.template docker-compose.yaml` 
@@ -31,7 +31,7 @@ You should see the subdirectories in `docker/` populated with actual source code
 
 We provide two options for obtaining the docker image. Please choose one of the methods listed below.
 
-#### Option 1. Pull built image from docker hub
+#### Option 1. Pull pre-built image from docker hub
 - We provide a pre-built image on dockerhub
   ```
   docker-compose pull
@@ -56,10 +56,10 @@ To check if the image is obtained successfully, please do `docker image ls` and 
 ### Step 2: Start the docker
 --------------------
 
-- Run `docker-compose up`. You should see the docker being setup.
+- Run `docker-compose up`. You should see the docker being setup. (add a `-d` flag if you would like to remove the docker container from your system on termination.)
 - This docker uses Jupyter notebooks, and you will see an URL once the docker is up. Please copy and paste the `127.0.0.1 URL`
 to a web browser of your choice to access the workspace. 
-- If the webpage does not work, please try the tourble shooting notes in `docker-compose.yaml`.
+- If you are experiencing any issues when bringing the page up, please try the tourble shooting notes in `docker-compose.yaml`.
 
 ### Step 3: Run experiments in the docker
 --------------------
