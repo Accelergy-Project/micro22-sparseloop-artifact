@@ -45,11 +45,7 @@ def run_timeloop(job_name, input_dict, base_dir, ert_path, art_path):
     print("\tRunning test: ", job_name)
 
     p = subprocess.Popen(subprocess_cmd)
-    try:
-        p.communicate(timeout=2) # wait for at most 2 seconds
-    except subprocess.TimeoutExpired:
-       print(job_name,  " reaches timeout limit")
-       os.kill(p.pid, signal.SIGINT)
+    p.communicate(timeout=None) 
 
 def main():
     

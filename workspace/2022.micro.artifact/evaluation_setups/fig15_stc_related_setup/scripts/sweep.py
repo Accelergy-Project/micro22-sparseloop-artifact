@@ -78,9 +78,10 @@ def run_timeloop(job_name, input_dict, ert_path, art_path, base_dir):
         counter = 0
         while not os.path.exists(os.path.join(output_dir, "timeloop-model.map+stats.xml")):
             counter = counter + 1
-            if counter == 100:
-                print("cannot find output after 100 sec, exiting...")
+            if counter == 500:
+                print("cannot find output after 500 sec, exiting...")
                 print("output causing this issue is: ", os.path.join(output_dir, "timeloop-model.map+stats.xml"))
+                print("if your machine can be slow, update the timeout setup at: ", this_file_path)
                 sys.exit(1)
             time.sleep(1)
             
