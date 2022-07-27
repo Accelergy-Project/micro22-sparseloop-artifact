@@ -1,0 +1,68 @@
+mapping:
+- bypass:
+  - Z
+  keep:
+  - A
+  - B
+  stream: []
+  target: LRF
+  type: datatype
+- bypass:
+  - A
+  - B
+  keep:
+  - Z
+  stream: []
+  target: RF
+  type: datatype
+- bypass:
+  - Z
+  keep:
+  - A
+  - B
+  stream:
+  - A
+  - B
+  target: SMEM
+  type: datatype
+- bypass: []
+  keep:
+  - A
+  - B
+  - Z
+  stream:
+  - A
+  - B
+  - Z
+  target: DRAM
+  type: datatype
+- factors: M16 N16 K1
+  no_link_transfer:
+  - A
+  - B
+  - Z
+  permutation: NMK
+  split: 1
+  target: LRF
+  type: spatial
+- factors: M4 N2 K1
+  permutation: NMK
+  target: LRF
+  type: temporal
+- factors: M1 N1 K288
+  permutation: KMN
+  target: RF
+  type: temporal
+- factors: M2 N2 K1
+  permutation: NMK
+  split: 0
+  target: SMEM
+  type: spatial
+- factors: M4 N4 K1
+  permutation: NMK
+  target: SMEM
+  type: temporal
+- factors: M1 N4 K1
+  permutation: NMK
+  target: DRAM
+  type: temporal

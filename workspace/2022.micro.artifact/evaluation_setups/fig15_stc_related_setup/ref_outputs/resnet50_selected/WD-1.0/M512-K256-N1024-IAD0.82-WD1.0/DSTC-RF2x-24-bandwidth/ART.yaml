@@ -1,0 +1,13 @@
+ART:
+  version: 0.3
+  tables:
+  - name: system.DRAM
+    area: 0
+  - name: system.SM.Subparition[0..3].RF
+    area: 25439.68
+  - name: system.SM.Subparition[0..3].LRF
+    area: 1309.6
+  - name: system.SM.Subparition[0..3].MAC[0..255]
+    area: 332.25
+  - name: system.SM.SMEM
+    area: 2604256.0
