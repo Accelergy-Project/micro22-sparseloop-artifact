@@ -31,7 +31,7 @@ def main(stats_prefix):
         job_info = stats_collector[job_name]
         
         baseline_dense_path = job_info["path"].replace("outputs", "dense_outputs")
-        baseline_dense_output_stats = parse_timeloop_stats(os.path.join(baseline_dense_path, "output", timeloop_prefix + ".map+stats.xml"))
+        baseline_dense_output_stats = parse_timeloop_stats(os.path.join(baseline_dense_path, "output", stats_prefix + ".map+stats.xml"))
         baseline_DRAM_accesses = sum(j for j in baseline_dense_output_stats["energy_breakdown_pJ"]["DRAM"]["actual_accesses_per_instance"])
         
         job_output_stats = parse_timeloop_stats(os.path.join(job_info["path"], "output", stats_prefix + ".map+stats.xml"))
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     options = parser.parse_args()
     OUT_DIR = options.output_dir
     
-    main(options.timeloop_prefix)
+    main(options.stats_prefix)
 
 
 

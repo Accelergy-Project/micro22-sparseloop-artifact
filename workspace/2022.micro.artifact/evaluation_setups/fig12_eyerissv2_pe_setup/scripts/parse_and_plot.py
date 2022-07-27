@@ -52,7 +52,7 @@ def main(base_output_dir):
     X_ticks = []
     
     # go through layers
-    layer_order = ["L07", "L27", "L21", "L13", "L19", "L25", "L21", "L09"]
+    layer_order = ["L07", "L27", "L21", "L13", "L19", "L25", "L23", "L09"]
     for layer_name in layer_order:
         if not os.path.exists(os.path.join(base_output_dir, layer_name)):
             break
