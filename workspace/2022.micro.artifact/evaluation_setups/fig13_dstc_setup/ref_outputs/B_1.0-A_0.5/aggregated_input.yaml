@@ -41,8 +41,8 @@ architecture:
             meshY: 1
             metadata_storage_depth: 64
             metadata_storage_width: 16
-            read_bandwidth: 115
-            write_bandwidth: 115
+            read_bandwidth: 116
+            write_bandwidth: 116
           class: storage
           name: Buffer
           subclass: SRAM_MD

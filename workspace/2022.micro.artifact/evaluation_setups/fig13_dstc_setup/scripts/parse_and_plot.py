@@ -29,6 +29,8 @@ def plot(my_data, gt_data):
     total_mine = 0
     for A_density, val in my_data.items():
         for B_density, cycles in val.items():
+            if A_density == 1 and B_density == 1:
+                continue
             if A_density != 1 or (A_density == 1 and B_density == 1):
                 my_bars.append(round(cycles/dense_mine,2))
                 gt_bars.append(round(gt_data[A_density][B_density]/dense_gt,2))
@@ -85,7 +87,7 @@ def main():
             cycles = raw_stats["cycles"]
             stats[A_density][B_density] = cycles
 
-    ground_truth_data = yaml.load(open(os.path.join(this_directory, "ground_truth.yaml")), Loader = yaml.SafeLoader)
+    ground_truth_data = yaml.load(open(os.path.join(this_directory, "baseline.yaml")), Loader = yaml.SafeLoader)
     plot(stats, ground_truth_data)
 
 

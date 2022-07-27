@@ -51,8 +51,8 @@ architecture:
                     cluster-size: 1
                     meshY: 1
                     meshX: 1
-                    write_bandwidth: 115
-                    read_bandwidth: 115
+                    write_bandwidth: 116
+                    read_bandwidth: 116
                 
                 - name: LineBuffer
                   class: storage

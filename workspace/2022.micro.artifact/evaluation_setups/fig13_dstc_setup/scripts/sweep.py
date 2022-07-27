@@ -11,7 +11,7 @@ this_directory = os.path.dirname(this_file_path)
 
 # paths to important input specs
 problem_template_path = os.path.join(this_directory, "..", "input_specs", "prob.yaml")
-arch_path = os.path.join(this_directory, "..", "input_specs", "arch.yaml")
+arch_path = os.path.join(this_directory, "..", "input_specs", "architecture.yaml")
 component_path = os.path.join(this_directory, "..", "input_specs", "compound_components.yaml")
 mapping_path = os.path.join(this_directory, "..", "input_specs", "Os-mapping.yaml")
 sparse_opt_path = os.path.join(this_directory, "..",  "input_specs", "sparse-opt.yaml")
