@@ -1,49 +1,13 @@
 problem:
-  shape:
-    name: "grouped-CONV"
-    dimensions: [ R, S, E, F, C, M, N, G ]
-    coefficients:
-      - name: Wstride
-        default: 1
-      - name: Hstride
-        default: 1
-      - name: Wdilation
-        default: 1
-      - name: Hdilation
-        default: 1
-        
-    data-spaces:
-      - name: Weights
-        projection:
-          - [ [C] ]
-          - [ [M] ]
-          - [ [G] ]
-          - [ [R] ]
-          - [ [S] ]
-      - name: Inputs
-        projection:
-          - [ [N] ]
-          - [ [C] ]
-          - [ [G] ]
-          - [ [R, Wdilation], [E, Wstride] ] # SOP form: R*Wdilation + P*Wstride
-          - [ [S, Hdilation], [F, Hstride] ] # SOE form: S*Hdilation + F*Hstride 
-      - name: Outputs
-        projection:
-          - [ [N] ]
-          - [ [G] ]  
-          - [ [M] ]
-          - [ [F] ]
-          - [ [E] ]
-        read-write: True
-  instance: 
-    M: 128   
-    E: 16   
-    F: 16   
-    R: 1   
-    S: 1   
-    N: 1   
-    G: 1   
-    C: 64   
+  instance:
+    C: 64
+    E: 16
+    F: 16
+    G: 1
+    M: 128
+    N: 1
+    R: 1
+    S: 1
     densities:
       Inputs:
         data_file_path: actual_data_masks/L09_iacts.txt
@@ -51,3 +15,52 @@ problem:
       Weights:
         data_file_path: actual_data_masks/L09_weights.txt
         distribution: real-data
+  shape:
+    coefficients:
+    - default: 1
+      name: Wstride
+    - default: 1
+      name: Hstride
+    - default: 1
+      name: Wdilation
+    - default: 1
+      name: Hdilation
+    data-spaces:
+    - name: Weights
+      projection:
+      - - - C
+      - - - M
+      - - - G
+      - - - R
+      - - - S
+    - name: Inputs
+      projection:
+      - - - N
+      - - - C
+      - - - G
+      - - - R
+          - Wdilation
+        - - E
+          - Wstride
+      - - - S
+          - Hdilation
+        - - F
+          - Hstride
+    - name: Outputs
+      projection:
+      - - - N
+      - - - G
+      - - - M
+      - - - F
+      - - - E
+      read-write: true
+    dimensions:
+    - R
+    - S
+    - E
+    - F
+    - C
+    - M
+    - N
+    - G
+    name: grouped-CONV

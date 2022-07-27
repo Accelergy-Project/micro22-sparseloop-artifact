@@ -10,10 +10,10 @@ problem:
     S: 1
     densities:
       Inputs:
-        data_file_path: actual_data_masks/L07_iacts.txt
+        data_file_path: /home/workspace/2022.micro.artifact/evaluation_setups/fig12_eyerissv2_pe_setup/scripts/../workload/mobilenet0.5-sparse/actual_data/actual_data_masks/L07_iacts.txt
         distribution: real-data
       Weights:
-        data_file_path: actual_data_masks/L07_weights.txt
+        data_file_path: /home/workspace/2022.micro.artifact/evaluation_setups/fig12_eyerissv2_pe_setup/scripts/../workload/mobilenet0.5-sparse/actual_data/actual_data_masks/L07_weights.txt
         distribution: real-data
   shape:
     coefficients:
