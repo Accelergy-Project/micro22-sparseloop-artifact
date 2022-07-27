@@ -56,7 +56,7 @@ To check if the image is obtained successfully, please do `docker image ls` and 
 ### Step 2: Start the docker
 --------------------
 
-- Run `docker-compose up`. You should see the docker being setup. (add a `-d` flag if you would like to remove the docker container from your system on termination.)
+- Run `docker-compose up`. You should see the docker being setup.
 - This docker uses Jupyter notebooks, and you will see an URL once the docker is up. Please copy and paste the `127.0.0.1 URL`
 to a web browser of your choice to access the workspace. 
 - If you are experiencing any issues when bringing the page up, please try the tourble shooting notes in `docker-compose.yaml`.
