@@ -69,8 +69,8 @@ def plot_csv(summary):
         plt.legend(loc='best')
         
         fig_name = "fig_" + stat_type + ".png"
-        plt.savefig(os.path.join("..", "outputs", fig_name))
-        print("Fig saved to ", os.path.abspath(os.path.join("..", "outputs", fig_name)))        
+        plt.savefig(os.path.join(os.pardir, "outputs", fig_name))
+        print("Fig saved to ", os.path.abspath(os.path.join(os.pardir, "outputs", fig_name)))        
         
     #plt.show()
 
@@ -106,7 +106,7 @@ def aggregate_model_stats(summary, verbose):
 
 def dump_csvs(summary, filename_base, revert = True, per_layer = True):
 
-    csv_path = os.path.join("..", "csv_results", filename_base + ".csv")
+    csv_path = os.path.join(os.pardir, "csv_results", filename_base + ".csv")
     if os.path.exists(csv_path):
         print("Warn: found existing file: ", csv_path, " --- remove")
         os.remove(csv_path)

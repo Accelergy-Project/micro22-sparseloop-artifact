@@ -62,7 +62,7 @@ def run_timeloop(job_name, input_dict, ert_path, art_path, base_dir):
         # generate corresponding mapping path
         path_elements = base_dir.split(os.sep)
         design_name = path_elements[-1]
-        mapping_path = os.path.join(this_directory, "..", "mappings_found", PRECISION, path_elements[-4], path_elements[-3], path_elements[-2], design_name, "map.yaml")
+        mapping_path = os.path.join(this_directory, os.pardir, "mappings_found", PRECISION, path_elements[-4], path_elements[-3], path_elements[-2], design_name, "map.yaml")
         
         if not (os.path.exists(mapping_path)):
             print("ERROR: cannot find mapping: ", mapping_path)
@@ -113,15 +113,15 @@ def process_constraints(design_point, aggregated_input):
 
     # further shrink mapspace for some of the cases
     sparsity_scheme_case = design_point["configurations"]["sparsity_schemes"]["W"]
-    if sparsity_scheme_case in ["2:8"] and "Ms" in dataflow_case:
+    if sparsity_scheme_case in ["2-8"] and "Ms" in dataflow_case:
         for target in architecture_constraints["targets"]:
             if target["target"] == "RF" and target["type"] == "spatial":
                 target["factors"] = "K=64 M=16 N=1"   
-    elif sparsity_scheme_case in ["2:6"] and "Ms" in dataflow_case:
+    elif sparsity_scheme_case in ["2-6"] and "Ms" in dataflow_case:
         for target in architecture_constraints["targets"]:
             if target["target"] == "RF" and target["type"] == "spatial":
                 target["factors"] = "K=48 M=16 N=1"   
-    elif sparsity_scheme_case in ["2:4"] and "Ms" in dataflow_case:
+    elif sparsity_scheme_case in ["2-4"] and "Ms" in dataflow_case:
         for target in architecture_constraints["targets"]:
             if target["target"] == "RF" and target["type"] == "spatial":
                 target["factors"] = "K=32 M=16 N=1"      
@@ -150,9 +150,9 @@ def process_format(design_point, aggregated_input):
         return aggregated_input
     
     if repr_case == "CP":
-        if sparsity_scheme_case == "2:4":
+        if sparsity_scheme_case == "2-4":
             num_metadata_bits = 2;
-        elif sparsity_scheme_case in ["2:6", "2:8"]:
+        elif sparsity_scheme_case in ["2-6", "2-8"]:
             num_metadata_bits = 3
         else:
             print(sparsity_scheme_case)
@@ -164,11 +164,11 @@ def process_format(design_point, aggregated_input):
                 target["representation-format"]["data-spaces"][0]["ranks"][-1]["format"] = repr_case
     
     elif repr_case == "RLE":
-        if sparsity_scheme_case == "2:6":
+        if sparsity_scheme_case == "2-6":
             num_metadata_bits = 2
-        elif sparsity_scheme_case == "2:4":
+        elif sparsity_scheme_case == "2-4":
             num_metadata_bits = 2
-        elif sparsity_scheme_case == "2:8":
+        elif sparsity_scheme_case == "2-8":
             num_metadata_bits = 3
         else:
             assert(False)
@@ -208,11 +208,11 @@ def process_instance_dimension(design_point, aggregated_input):
     if sparsity_scheme == "dense":
         return aggregated_input
     
-    if sparsity_scheme in ["2:4"]:
+    if sparsity_scheme in ["2-4"]:
         min_granularity = 4
-    elif sparsity_scheme in ["2:6", "A-U0.3333"]:
+    elif sparsity_scheme in ["2-6", "A-U0.3333"]:
         min_granularity = 48
-    elif sparsity_scheme in ["2:8"]:
+    elif sparsity_scheme in ["2-8"]:
         min_granularity = 8
     elif "0.5" in sparsity_scheme:
         min_granularity = 2
@@ -234,8 +234,8 @@ def process_instance_dimension(design_point, aggregated_input):
         if not padded_K == orig_K:
             print("padding applied to maintain structure: padded K: ", padded_K, "  orig K: ", orig_K)
     
-    # 2:6 needs special padding
-    if design_point["configurations"]["sparsity_schemes"] == "2:6":
+    # 2-6 needs special padding
+    if design_point["configurations"]["sparsity_schemes"] == "2-6":
         ratio = 6/2
         min_spatial_K = int(16*ratio)
         K = aggregated_input["problem"]["instance"]["K"]
@@ -561,7 +561,7 @@ import argparse
 
 parser = argparse.ArgumentParser(""" sweep various workloads (DNN layers) for different accelerator designs """)
 parser.add_argument('-d', '--design_point', type=str, default= "MICRO22-STC-Case-Study", help="design point file to run, any file name in ../arch_templates/HW_systems/design_points/...")
-parser.add_argument('-o', '--output_dir', type=str, default=os.path.join(this_directory, "..", "outputs"), help='top level output directory' )
+parser.add_argument('-o', '--output_dir', type=str, default=os.path.join(this_directory, os.pardir, "outputs"), help='top level output directory' )
 parser.add_argument('--layer_idx', type=int, default=None, help='specific layer idex to run')
 parser.add_argument('--density_degrees', nargs = "*", type=float, default=[1.0, 0.5, 0.3333, 0.25], help='weight density degrees to run')
 parser.add_argument('--max_layers', type=int, default=100, help='max number of layers to run')
